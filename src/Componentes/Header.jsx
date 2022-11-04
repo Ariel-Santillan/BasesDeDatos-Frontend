@@ -10,6 +10,7 @@ import Avatar from '@mui/material/Avatar'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import * as React from 'react'
+import { useNavigate } from "react-router-dom"
 
 const theme = createTheme({
   palette: {
@@ -28,7 +29,7 @@ const theme = createTheme({
   },
 })
 
-const options = ['Home', 'ABM', 'Logout']
+const options = [{titulo:'Home',ruta:'/'}, {titulo:'ABM',ruta:'/abm'}]
 
 const ITEM_HEIGHT = 48
 
@@ -74,6 +75,7 @@ export default function Header() {
   }))
 
   const [anchorEl, setAnchorEl] = React.useState(null)
+  const navigate = useNavigate()
   const open = Boolean(anchorEl)
 
   const handleClick = (event) => {
@@ -82,6 +84,11 @@ export default function Header() {
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleOption = (ruta) => {
+    handleClose()
+    navigate(ruta)
   }
 
   return (
@@ -116,10 +123,10 @@ export default function Header() {
           >
             {options.map((option) => 
               <MenuItem
-                key={option}
-                onClick={handleClose}
+                key={option.titulo}
+                onClick={() => handleOption(option.ruta)}
               >
-                {option}
+                {option.titulo}
               </MenuItem>
             )}
           </Menu>
