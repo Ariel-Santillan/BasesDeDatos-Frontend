@@ -32,7 +32,18 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+/* TEXTO GLOBAL */
+.texto-secundario {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
 }

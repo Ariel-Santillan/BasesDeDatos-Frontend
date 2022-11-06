@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import ABM from './pages/ABM'
-import Header from './Componentes/Header'
+import Header from './componentes/Header'
 
 export const AppRoute = () => 
   <>
