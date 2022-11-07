@@ -4,7 +4,16 @@ const categorias = [
     'Arte',
     'Ciencia',
     'Cocina',
-    'Divertimento y juegos'
+    'Divertimento y juegos',
+    'Psicología',
+    'Tecnología',
+    'Mindfullness',
+    'Meditación',
+    'Espiritualidad',
+    'Web',
+    'Casamiento',
+    'Infancia',
+    'LGTBIQ+'
 ]
 
 export default categorias
