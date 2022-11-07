@@ -5,7 +5,7 @@ import categorias from "../../categoriasMock"
 import { Box } from '@mui/system'
 
 function ScrollBarCategoria() {
-    return <Box disableGutters sx={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: 'nowrap', maxWidth: '100%' }}>
+    return <Box sx={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: 'nowrap', maxWidth: '100%' }}>
         {['Todos', ...categorias].map((categoria, index) =>
             <ChipCategoria
                 key={index}

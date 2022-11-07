@@ -5,39 +5,43 @@ import Table from '@mui/material/Table'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
+import Container from '@mui/material/Container'
 
+import './TablaContenidos.css'
 import contenidos from '../../contenidosMock'
 
 function TablaContenidos() {
-    return <TableContainer component={Paper}>
-        <Table>
-            <TableHead>
-                <TableRow>
-                    <TableCell>Nombre</TableCell>
-                    <TableCell align="right">Extension</TableCell>
-                    <TableCell align="right">Cantidad de visualizaciones</TableCell>
-                    <TableCell align="right">Cantidad de descargas</TableCell>
-                    <TableCell align="right">Categorias</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {contenidos.map(contenido =>
-                    <TableRow
-                        key={contenido.nombre}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                        <TableCell>
-                            {contenido.nombre}
-                        </TableCell>
-                        <TableCell>{contenido.extension}</TableCell>
-                        <TableCell align="right">{contenido.cantidadVisualizaciones}</TableCell>
-                        <TableCell align="right">{contenido.cantidadDescargas}</TableCell>
-                        <TableCell align="right">{contenido.categorías}</TableCell>
+    return <Container sx={{paddingTop: '2%'}}>
+        <TableContainer component={Paper}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Nombre</TableCell>
+                        <TableCell align="right">Extension</TableCell>
+                        <TableCell align="right">Cantidad de visualizaciones</TableCell>
+                        <TableCell align="right">Cantidad de descargas</TableCell>
+                        <TableCell align="right">Categorias</TableCell>
                     </TableRow>
-                )}
-            </TableBody>
-        </Table>
-    </TableContainer>
+                </TableHead>
+                <TableBody>
+                    {contenidos.map(contenido =>
+                        <TableRow
+                            key={contenido.nombre}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                            <TableCell>
+                                {contenido.nombre}
+                            </TableCell>
+                            <TableCell>{contenido.extension}</TableCell>
+                            <TableCell align="right">{contenido.cantidadVisualizaciones}</TableCell>
+                            <TableCell align="right">{contenido.cantidadDescargas}</TableCell>
+                            <TableCell align="right">{contenido.categorías}</TableCell>
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    </Container>
 }
 
 export default TablaContenidos
