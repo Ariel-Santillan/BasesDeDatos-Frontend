@@ -7,7 +7,6 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Container from '@mui/material/Container'
 
-import './TablaContenidos.css'
 import contenidos from '../../contenidosMock'
 
 function TablaContenidos() {
