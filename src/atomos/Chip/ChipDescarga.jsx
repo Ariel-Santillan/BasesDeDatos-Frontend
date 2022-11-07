@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Chip from '@mui/material/Chip'
@@ -5,9 +6,12 @@ import './Chip.css'
 
 
 function ChipDescarga({texto}) {
+    const [estaClickeado, setEstaClickeado] = useState(false)
+
     return <Chip
         label={texto}
-        className='glass-background'
+        className={estaClickeado ? 'glass-background-esta-clickeado' : 'glass-background'}
+        onClick={() => setEstaClickeado(!estaClickeado)}
     />
 }
 
