@@ -4,6 +4,7 @@ import ArrowCircleDownRoundedIcon from '@mui/icons-material/ArrowCircleDownRound
 import ListItemContenido from "../atomos/ListItemContenido/ListItemContenido"
 
 import ScrollBarCategoria from '../moleculas/ScrollBarCategoria/ScrollBarCategoria'
+import TablaContenidos from '../moleculas/TablaContenidos/TablaContenidos'
 
 export default function Home() {
   return <>
@@ -11,5 +12,6 @@ export default function Home() {
     <ListItemContenido icono={<PictureAsPdfIcon></PictureAsPdfIcon>}
       nombreContenido={"Entendiendo la vida"}
       botonDeAccionContenido={<ArrowCircleDownRoundedIcon></ArrowCircleDownRoundedIcon>}></ListItemContenido>
+    <TablaContenidos></TablaContenidos>
   </>
 }
