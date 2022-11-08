@@ -1,3 +1,5 @@
+import TablaContenidos from '../moleculas/TablaContenidos/TablaContenidos'
+
 export default function Reporte() {
-    return <h1>hola</h1>
+    return <TablaContenidos></TablaContenidos>
 }
