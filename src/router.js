@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
-import ABM from './pages/ABM'
+import Reporte from './pages/Reporte'
 import Header from './componentes/Header'
 
 export const AppRoute = () => 
@@ -8,7 +8,7 @@ export const AppRoute = () =>
     <Header />
     <Routes>
       <Route path="/" exact element={<Home />} />
-      <Route path="/abm" exact element={<ABM />} />
+      <Route path="/reporte" exact element={<Reporte />} />
     </Routes>
   </>
 
