@@ -14,9 +14,12 @@ export default function Home() {
     <Container sx={{paddingTop: '2%'}}>
       <Grid container spacing={2}>
         {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) =>
-        <ListItemContenido key={index} icono={<PictureAsPdfIcon></PictureAsPdfIcon>}
+        <ListItemContenido
+          key={index}
+          icono={<PictureAsPdfIcon></PictureAsPdfIcon>}
           nombreContenido={item}
-          botonDeAccionContenido={<ArrowCircleDownRoundedIcon></ArrowCircleDownRoundedIcon>}>
+          botonDeAccionContenido={<ArrowCircleDownRoundedIcon></ArrowCircleDownRoundedIcon>}
+          idContenido={item}>
         </ListItemContenido>
         )}
       </Grid>

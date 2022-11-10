@@ -7,14 +7,37 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
+import { useState } from 'react'
 
 import DownloadForOfflineRoundedIcon from '@mui/icons-material/DownloadForOfflineRounded'
 import ModeOutlinedIcon from '@mui/icons-material/ModeOutlined'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
+import { service } from './../../service/Service'
 
 import './ListItemContenido.css'
+import { ExpandCircleDownOutlined } from '@mui/icons-material'
 
-function ListItemContenido({ icono, nombreContenido, botonDeAccionContenido }) {
+const ListItemContenido = (props) => {
+
+  const [contenido, setContenido] = useState([])
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const eliminar = async () => {
+    try {
+      console.log(props)
+      console.log(props.idContenido)
+      console.log("eliminar")
+      await service.eliminarContenido(props.idContenido)
+      console.log("eliminar2")
+
+    }catch(e){
+    generarError(e)
+    }
+  }
+
+  const generarError = (error) => {
+    console.log(error)
+  }
   return (
     <Grid item xs={3}>
       <Card className={'glass-background-item'}>
@@ -44,7 +67,7 @@ function ListItemContenido({ icono, nombreContenido, botonDeAccionContenido }) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">
+          <Button size="small" onClick={eliminar}>
             <DeleteForeverOutlinedIcon fontSize='large'></DeleteForeverOutlinedIcon>
           </Button>
           <Button size="small">
@@ -68,7 +91,8 @@ function ListItemContenido({ icono, nombreContenido, botonDeAccionContenido }) {
 ListItemContenido.propTypes = {
   icono: PropTypes.object,
   nombreContenido: PropTypes.string,
-  botonDeAccionContenido: PropTypes.object
+  botonDeAccionContenido: PropTypes.object,
+  idContenido: PropTypes.number
 }
 
 export default ListItemContenido
