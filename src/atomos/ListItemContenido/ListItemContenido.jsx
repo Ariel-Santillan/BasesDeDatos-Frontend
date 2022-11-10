@@ -32,18 +32,19 @@ const ListItemContenido = (props) => {
 
   const eliminar = async () => {
     try {
-      console.log(props)
-      console.log(props.idContenido)
-      console.log('eliminar')
       await service.eliminarContenido(props.idContenido)
-      console.log('eliminar2')
     } catch (e) {
       generarError(e)
     }
+    close()
   }
 
   const editar = async () => {
-    console.log('editar')
+    try {
+      await service.editarContenido(props.idContenido)
+    } catch (e) {
+      generarError(e)
+    }
     close()
   }
 
