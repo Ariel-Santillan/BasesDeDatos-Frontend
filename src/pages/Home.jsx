@@ -17,7 +17,8 @@ export default function Home() {
         <ListItemContenido
           key={index}
           icono={<PictureAsPdfIcon></PictureAsPdfIcon>}
-          nombreContenido={item}
+          //nombreContenido={item}
+          nombreContenido={item.toString()}
           botonDeAccionContenido={<ArrowCircleDownRoundedIcon></ArrowCircleDownRoundedIcon>}
           idContenido={item}>
         </ListItemContenido>
