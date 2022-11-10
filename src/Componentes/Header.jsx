@@ -7,8 +7,8 @@ import SearchIcon from '@mui/icons-material/Search'
 import { styled, alpha, createTheme } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import Avatar from '@mui/material/Avatar'
-import * as React from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import {service} from '../service/Service'
 
 import Drawer from '@mui/material/Drawer'
 import SideBar from '../organismos/SideBar'
@@ -31,6 +31,23 @@ const theme = createTheme({
 })
 
 export default function Header() {
+
+  const [textoBusqueda, setTextoBusqueda] = useState('')
+  //const [contenidos, setContenidos] = useState([])
+
+  useEffect (() => {
+    const fetchData = async () => {
+      //const contenidosFiltrados = await service.getData(textoBusqueda)
+      //setContenidos(contenidosFiltrados) 
+    }
+
+    try{
+      fetchData()
+    }catch (error) {
+      console.log(error)
+  }
+},[textoBusqueda])
+
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -98,7 +115,7 @@ export default function Header() {
           >
             <SideBar cerrarModal={() => setEstaDesplegado(false)}></SideBar>
           </Drawer>
-          <Search>
+          <Search value={textoBusqueda} onChange={(event)=>setTextoBusqueda(event.target.value)}>
             <SearchIconWrapper>
               <SearchIcon theme={theme} color="icono" />
             </SearchIconWrapper>
@@ -112,3 +129,4 @@ export default function Header() {
     </Box>
   )
 }
+

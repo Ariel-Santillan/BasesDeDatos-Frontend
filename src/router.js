@@ -3,12 +3,17 @@ import Home from './pages/Home'
 import Reporte from './pages/Reporte'
 import Header from './Componentes/Header'
 
-export const AppRoute = () => 
-  <>
+export const AppRoute = () => {
+  return(
+    <>
     <Header />
     <Routes>
       <Route path="/" exact element={<Home />} />
       <Route path="/reporte" exact element={<Reporte />} />
     </Routes>
   </>
+  )
+  
+}
+  
 

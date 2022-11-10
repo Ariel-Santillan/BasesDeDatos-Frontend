@@ -13,6 +13,7 @@ import DownloadForOfflineRoundedIcon from '@mui/icons-material/DownloadForOfflin
 import ModeOutlinedIcon from '@mui/icons-material/ModeOutlined'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import { service } from './../../service/Service'
+//import {contenido} from '../../dominio/Contenido'
 
 import './ListItemContenido.css'
 import Dialog from '@mui/material/Dialog'
@@ -26,30 +27,28 @@ import { Input } from '@mui/material'
 const ListItemContenido = (props) => {
   const [openEliminar, setOpenEliminar] = useState(false)
   const [openEditar, setOpenEditar] = useState(false)
-  const [nombre, setNombre] = useState('')
-  //const [contenido, setContenido] = useState([])
-  //const [errorMessage, setErrorMessage] = useState('')
-
+  const [nuevoTitulo, setNuevoTitulo] = useState(props.contenido.titulo)
+  
   const eliminar = async () => {
     try {
-      await service.eliminarContenido(props.idContenido)
+      await service.eliminarContenido(props.contenido.idContenido)
     } catch (e) {
       generarError(e)
     }
     close()
   }
 
-  const editar = async () => {
+  const aceptarEdicion = async () => {
     try {
-      await service.editarContenido(props.idContenido)
+      await service.editarContenido(
+        props.contenido.idContenido,
+        props.contenido.titulo,
+      )
+        props.editar(props.contenido.idContenido,nuevoTitulo)
     } catch (e) {
-      generarError(e)
+      console.log(e)
     }
     close()
-  }
-
-  const generarError = (error) => {
-    console.log(error)
   }
 
   const clickOpenEliminar = () => {
@@ -64,8 +63,11 @@ const ListItemContenido = (props) => {
   const clickOpenEditar = () => {
     setOpenEditar(true)
   }
-
-  
+//preguntar
+  const cambiarTitulo = (event) => {
+    setNuevoTitulo(event.target.value) 
+    
+  }
 
   return (
     <Grid item xs={3}>
@@ -88,7 +90,7 @@ const ListItemContenido = (props) => {
             </Grid>
           </Grid>
           <Typography variant="h5" component="div">
-            hola
+            {props.contenido.titulo}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             adjective
@@ -101,13 +103,10 @@ const ListItemContenido = (props) => {
         </CardContent>
         <CardActions>
           <div>
-            <Button size="small" /*onClick={eliminar}*/ onClick={clickOpenEliminar}>
+            <Button size="small" onClick={clickOpenEliminar}>
               <DeleteForeverOutlinedIcon fontSize="large"></DeleteForeverOutlinedIcon>
             </Button>
-            <Dialog 
-            open={openEliminar}
-            >
-              
+            <Dialog open={openEliminar}>
               <DialogTitle id="alert-dialog-title">{'Eliminar'}</DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
@@ -123,24 +122,25 @@ const ListItemContenido = (props) => {
             </Dialog>
           </div>
           <div>
-          <Button size="small" /*onClick={editar}*/ onClick={clickOpenEditar}>
-            <ModeOutlinedIcon fontSize="large"></ModeOutlinedIcon>
-          </Button>
-          <Dialog 
-            open={openEditar}
-            >
-              
+            <Button size="small" onClick={clickOpenEditar}>
+              <ModeOutlinedIcon fontSize="large"></ModeOutlinedIcon>
+            </Button>
+            <Dialog open={openEditar}>
               <DialogTitle id="alert-dialog-title">{'Editar'}</DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
                   Nombre
                 </DialogContentText>
-                <Input value={nombre} onChange={(event) => setNombre(event.target.value)}>
-                </Input>
+                <Input
+                  value={nuevoTitulo}
+                  /*onChange={(event) => setNombre(event.target.value)}*/ onChange={
+                    cambiarTitulo
+                  }
+                ></Input>
               </DialogContent>
               <DialogActions>
                 <Button onClick={close}>Cancelar</Button>
-                <Button onClick={editar} autoFocus>
+                <Button onClick={aceptarEdicion} autoFocus>
                   Aceptar
                 </Button>
               </DialogActions>
@@ -163,9 +163,9 @@ const ListItemContenido = (props) => {
 
 ListItemContenido.propTypes = {
   icono: PropTypes.object,
-  nombreContenido: PropTypes.string,
   botonDeAccionContenido: PropTypes.object,
-  idContenido: PropTypes.number,
+  contenido: PropTypes.object,
+  editar: PropTypes.func,
 }
 
 export default ListItemContenido

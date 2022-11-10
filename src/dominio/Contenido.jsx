@@ -1,6 +1,28 @@
 export class Contenido{
     
   constructor(){
-      this.id = 0
+      this.idContenido = 0
+      this.titulo=''
   }
+
+  static fromJson(contenido){
+    return Object.assign(
+        new Contenido(),
+        contenido,
+        {}
+    )
+   
+}
+
+static toJson(idContenido,nombre){
+  return {
+      idContenido:idContenido,
+      nombre:nombre
+  }
+}
+
+//const contiene(texto) => {
+ // const textoMinuscula = texto.toLowerCase()
+ // return titulo.toLowerCase().includes(textoMinuscula) || this.texto.toLowerCase().includes(textoMinuscula)
+//}
 }
