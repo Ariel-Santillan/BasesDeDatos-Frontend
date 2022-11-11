@@ -72,7 +72,7 @@ const ListItemContenido = (props) => {
   return (
     <Grid item xs={3}>
       <Card className={'glass-background-item'}>
-        <CardContent>
+        <CardContent sx={{background: 'radial-gradient(100% 2294.72% at 0% 0%, rgba(255, 255, 255, 0.56) 0%, rgba(255, 255, 255, 0.24) 99.48%)'}}>
           <Grid container>
             <Grid item xs={8}>
               <Typography
