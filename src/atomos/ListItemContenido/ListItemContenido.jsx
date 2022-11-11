@@ -12,6 +12,7 @@ import { useState } from 'react'
 import DownloadForOfflineRoundedIcon from '@mui/icons-material/DownloadForOfflineRounded'
 import ModeOutlinedIcon from '@mui/icons-material/ModeOutlined'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
+import Chip from '@mui/material/Chip'
 import { service } from './../../service/Service'
 //import {contenido} from '../../dominio/Contenido'
 
@@ -22,13 +23,26 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import { Input } from '@mui/material'
+
+import ArticleIcon from '@mui/icons-material/Article'
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
+import AudiotrackIcon from '@mui/icons-material/Audiotrack'
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo'
 //import { ExpandCircleDownOutlined } from '@mui/icons-material'
+
+const mapaIconoExtension = {
+  PDF: <PictureAsPdfIcon fontSize="large"></PictureAsPdfIcon>,
+  DOCX: <ArticleIcon fontSize="large"></ArticleIcon>,
+  MP3: <AudiotrackIcon fontSize="large"></AudiotrackIcon>,
+  MP4: <AudiotrackIcon fontSize="large"></AudiotrackIcon>,
+  WAV: <OndemandVideoIcon fontSize="large"></OndemandVideoIcon>
+}
 
 const ListItemContenido = (props) => {
   const [openEliminar, setOpenEliminar] = useState(false)
   const [openEditar, setOpenEditar] = useState(false)
   const [nuevoTitulo, setNuevoTitulo] = useState(props.contenido.titulo)
-  
+
   const eliminar = async () => {
     try {
       await service.eliminarContenido(props.contenido.idContenido)
@@ -44,7 +58,7 @@ const ListItemContenido = (props) => {
         props.contenido.idContenido,
         props.contenido.titulo,
       )
-        props.editar(props.contenido.idContenido,nuevoTitulo)
+      props.editar(props.contenido.idContenido, nuevoTitulo)
     } catch (e) {
       console.log(e)
     }
@@ -63,27 +77,26 @@ const ListItemContenido = (props) => {
   const clickOpenEditar = () => {
     setOpenEditar(true)
   }
-//preguntar
+  //preguntar
   const cambiarTitulo = (event) => {
-    setNuevoTitulo(event.target.value) 
-    
+    setNuevoTitulo(event.target.value)
+
+  }
+
+  function mapearIconoSegunExtension(contenido) {
+    return mapaIconoExtension[contenido.extension]
   }
 
   return (
     <Grid item xs={3}>
       <Card className={'glass-background-item'}>
-        <CardContent sx={{background: 'radial-gradient(100% 2294.72% at 0% 0%, rgba(255, 255, 255, 0.56) 0%, rgba(255, 255, 255, 0.24) 99.48%)'}}>
-          <Grid container>
+        <CardContent sx={{ background: 'radial-gradient(100% 2294.72% at 0% 0%, rgba(255, 255, 255, 0.56) 0%, rgba(255, 255, 255, 0.24) 99.48%)' }}>
+          <Grid container sx={{justifyContent: 'space-around'}}>
             <Grid item xs={8}>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                Word of the Day
-              </Typography>
+              <Chip sx={{ color: '#000000', fontWeight: '700', background: 'radial-gradient(100% 1118.07% at 0% 0%, rgba(12, 111, 246, 0.6) 0%, rgba(0, 235, 247, 0.6) 100%)' }}
+                label={props.contenido.fechaPublicacion}></Chip>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={2}>
               <Button size="small">
                 <DownloadForOfflineRoundedIcon fontSize="large"></DownloadForOfflineRoundedIcon>
               </Button>
@@ -92,60 +105,59 @@ const ListItemContenido = (props) => {
           <Typography variant="h5" component="div">
             {props.contenido.titulo}
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            adjective
-          </Typography>
-          <Typography variant="body2">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
         </CardContent>
         <CardActions>
-          <div>
-            <Button size="small" onClick={clickOpenEliminar}>
-              <DeleteForeverOutlinedIcon fontSize="large"></DeleteForeverOutlinedIcon>
-            </Button>
-            <Dialog open={openEliminar}>
-              <DialogTitle id="alert-dialog-title">{'Eliminar'}</DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  ¿Esta seguro que desea eliminar?
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={close}>No</Button>
-                <Button onClick={eliminar} autoFocus>
-                  Si
-                </Button>
-              </DialogActions>
-            </Dialog>
-          </div>
-          <div>
-            <Button size="small" onClick={clickOpenEditar}>
-              <ModeOutlinedIcon fontSize="large"></ModeOutlinedIcon>
-            </Button>
-            <Dialog open={openEditar}>
-              <DialogTitle id="alert-dialog-title">{'Editar'}</DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  Nombre
-                </DialogContentText>
-                <Input
-                  value={nuevoTitulo}
+          <Grid container sx={{justifyContent: 'space-between'}}>
+            <Grid item xs={4}>
+              <Button variant="text" sx={{ color: '#0C6FF6' }}>
+                {mapearIconoSegunExtension(props.contenido)}
+              </Button>
+            </Grid>
+            <Grid item xs={4}>
+              <Button size="small" onClick={clickOpenEliminar}>
+                <DeleteForeverOutlinedIcon fontSize="large"></DeleteForeverOutlinedIcon>
+              </Button>
+              <Dialog open={openEliminar}>
+                <DialogTitle id="alert-dialog-title">{'Eliminar'}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    ¿Esta seguro que desea eliminar?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={close}>No</Button>
+                  <Button onClick={eliminar} autoFocus>
+                    Si
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </Grid>
+            <Grid item xs={4}>
+              <Button size="small" onClick={clickOpenEditar}>
+                <ModeOutlinedIcon fontSize="large"></ModeOutlinedIcon>
+              </Button>
+              <Dialog open={openEditar}>
+                <DialogTitle id="alert-dialog-title">{'Editar'}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    Nombre
+                  </DialogContentText>
+                  <Input
+                    value={nuevoTitulo}
                   /*onChange={(event) => setNombre(event.target.value)}*/ onChange={
-                    cambiarTitulo
-                  }
-                ></Input>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={close}>Cancelar</Button>
-                <Button onClick={aceptarEdicion} autoFocus>
-                  Aceptar
-                </Button>
-              </DialogActions>
-            </Dialog>
-          </div>
+                      cambiarTitulo
+                    }
+                  ></Input>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={close}>Cancelar</Button>
+                  <Button onClick={aceptarEdicion} autoFocus>
+                    Aceptar
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </Grid>
+          </Grid>
         </CardActions>
       </Card>
     </Grid>

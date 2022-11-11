@@ -1,28 +1,26 @@
-export class Contenido{
-    
-  constructor(){
-      this.idContenido = 0
-      this.titulo=''
+export class Contenido {
+  constructor() {
+    this.idContenido = 0
+    this.titulo = ''
   }
 
-  static fromJson(contenido){
+  static fromJson(contenido) {
     return Object.assign(
-        new Contenido(),
-        contenido,
-        {}
+      new Contenido(),
+      contenido,
+      {}
     )
-   
-}
-
-static toJson(idContenido,nombre){
-  return {
-      idContenido:idContenido,
-      nombre:nombre
   }
-}
 
-//const contiene(texto) => {
- // const textoMinuscula = texto.toLowerCase()
- // return titulo.toLowerCase().includes(textoMinuscula) || this.texto.toLowerCase().includes(textoMinuscula)
-//}
+  static toJson(idContenido, nombre) {
+    return {
+      idContenido: idContenido,
+      nombre: nombre
+    }
+  }
+
+  //const contiene(texto) => {
+  // const textoMinuscula = texto.toLowerCase()
+  // return titulo.toLowerCase().includes(textoMinuscula) || this.texto.toLowerCase().includes(textoMinuscula)
+  //}
 }

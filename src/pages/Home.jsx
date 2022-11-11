@@ -1,8 +1,6 @@
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
 import ArrowCircleDownRoundedIcon from '@mui/icons-material/ArrowCircleDownRounded'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
-
 
 import ListItemContenido from "../atomos/ListItemContenido/ListItemContenido"
 import ScrollBarCategoria from '../moleculas/ScrollBarCategoria/ScrollBarCategoria'
@@ -39,8 +37,7 @@ export default function Home() {
         {contenidos.map((contenido, index) =>
         <ListItemContenido
           key={index}
-          icono={<PictureAsPdfIcon></PictureAsPdfIcon>}
-          botonDeAccionContenido={<ArrowCircleDownRoundedIcon></ArrowCircleDownRoundedIcon>}
+          botonDeAccionContenido={<ArrowCircleDownRoundedIcon fontSize='large'></ArrowCircleDownRoundedIcon>}
           contenido={contenido}
           editar={editar}>
         </ListItemContenido>
