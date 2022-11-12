@@ -4,6 +4,8 @@ import Reporte from './pages/Reporte'
 import Header from './componentes/Header'
 
 export const AppRoute = () => {
+
+  
   return(
     <>
     <Header />

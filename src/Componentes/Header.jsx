@@ -33,12 +33,12 @@ const theme = createTheme({
 export default function Header() {
 
   const [textoBusqueda, setTextoBusqueda] = useState('')
-  //const [contenidos, setContenidos] = useState([])
+  const [contenidos, setContenidos] = useState([])
 
   useEffect (() => {
     const fetchData = async () => {
-      //const contenidosFiltrados = await service.getData(textoBusqueda)
-      //setContenidos(contenidosFiltrados) 
+      const contenidosFiltrados = await service.getData(textoBusqueda)
+      setContenidos(contenidosFiltrados) 
     }
 
     try{

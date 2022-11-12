@@ -25,7 +25,9 @@ class Service {
     console.log("texto" + textoBusqueda)
     // const contenidosJson = await axios.get(`http://localhost:8080/contenido`)
     //return contenidosJson.data.map((contenido) => Contenido.fromJson(contenido))
+
     return [{ idContenido: 0, titulo: 'cars' }, { idContenido: 1, titulo: 'Coco' }, { idContenido: 2, titulo: 'Casablanca' }]
+
   }
 }
 

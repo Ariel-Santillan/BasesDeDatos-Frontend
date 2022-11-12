@@ -38,14 +38,18 @@ const mapaIconoExtension = {
   WAV: <OndemandVideoIcon fontSize="large"></OndemandVideoIcon>
 }
 
+
 const ListItemContenido = (props) => {
   const [openEliminar, setOpenEliminar] = useState(false)
   const [openEditar, setOpenEditar] = useState(false)
   const [nuevoTitulo, setNuevoTitulo] = useState(props.contenido.titulo)
 
-  const eliminar = async () => {
+
+  const aceptarEliminar = async () => {
+
     try {
       await service.eliminarContenido(props.contenido.idContenido)
+      props.eliminar(props.contenido.idContenido)
     } catch (e) {
       generarError(e)
     }
@@ -77,14 +81,14 @@ const ListItemContenido = (props) => {
   const clickOpenEditar = () => {
     setOpenEditar(true)
   }
-  //preguntar
-  const cambiarTitulo = (event) => {
-    setNuevoTitulo(event.target.value)
-
-  }
 
   function mapearIconoSegunExtension(contenido) {
     return mapaIconoExtension[contenido.extension]
+  }
+
+
+  const cambiarTitulo = (event) => {
+    setNuevoTitulo(event.target.value)
   }
 
   return (
@@ -178,6 +182,7 @@ ListItemContenido.propTypes = {
   botonDeAccionContenido: PropTypes.object,
   contenido: PropTypes.object,
   editar: PropTypes.func,
+  eliminar: PropTypes.func,
 }
 
 export default ListItemContenido
