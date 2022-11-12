@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
+import Link from '@mui/material/Link'
 //import Box from '@mui/material/Box'
 import { useState } from 'react'
 
@@ -15,7 +16,6 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import Chip from '@mui/material/Chip'
 import { service } from './../../service/Service'
 //import {contenido} from '../../dominio/Contenido'
-
 import './ListItemContenido.css'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
@@ -31,18 +31,18 @@ import OndemandVideoIcon from '@mui/icons-material/OndemandVideo'
 //import { ExpandCircleDownOutlined } from '@mui/icons-material'
 
 const mapaIconoExtension = {
-  PDF: <PictureAsPdfIcon fontSize="large"></PictureAsPdfIcon>,
-  DOCX: <ArticleIcon fontSize="large"></ArticleIcon>,
-  MP3: <AudiotrackIcon fontSize="large"></AudiotrackIcon>,
-  MP4: <AudiotrackIcon fontSize="large"></AudiotrackIcon>,
-  WAV: <OndemandVideoIcon fontSize="large"></OndemandVideoIcon>
+	PDF: <PictureAsPdfIcon fontSize="large"></PictureAsPdfIcon>,
+	DOCX: <ArticleIcon fontSize="large"></ArticleIcon>,
+	MP3: <AudiotrackIcon fontSize="large"></AudiotrackIcon>,
+	MP4: <AudiotrackIcon fontSize="large"></AudiotrackIcon>,
+	WAV: <OndemandVideoIcon fontSize="large"></OndemandVideoIcon>
 }
 
 
 const ListItemContenido = (props) => {
-  const [openEliminar, setOpenEliminar] = useState(false)
-  const [openEditar, setOpenEditar] = useState(false)
-  const [nuevoTitulo, setNuevoTitulo] = useState(props.contenido.titulo)
+	const [openEliminar, setOpenEliminar] = useState(false)
+	const [openEditar, setOpenEditar] = useState(false)
+	const [nuevoTitulo, setNuevoTitulo] = useState(props.contenido.titulo)
 
 
   const aceptarEliminar = async () => {
@@ -56,133 +56,136 @@ const ListItemContenido = (props) => {
     close()
   }
 
-  const aceptarEdicion = async () => {
-    try {
-      await service.editarContenido(
-        props.contenido.idContenido,
-        props.contenido.titulo,
-      )
-      props.editar(props.contenido.idContenido, nuevoTitulo)
-    } catch (e) {
-      console.log(e)
-    }
-    close()
-  }
+	const aceptarEdicion = async () => {
+		try {
+			await service.editarContenido(
+				props.contenido.idContenido,
+				props.contenido.titulo,
+			)
+			props.editar(props.contenido.idContenido, nuevoTitulo)
+		} catch (e) {
+			console.log(e)
+		}
+		close()
+	}
 
-  const clickOpenEliminar = () => {
-    setOpenEliminar(true)
-  }
+	const clickOpenEliminar = () => {
+		setOpenEliminar(true)
+	}
 
-  const close = () => {
-    setOpenEliminar(false)
-    setOpenEditar(false)
-  }
+	const close = () => {
+		setOpenEliminar(false)
+		setOpenEditar(false)
+	}
 
-  const clickOpenEditar = () => {
-    setOpenEditar(true)
-  }
+	const clickOpenEditar = () => {
+		setOpenEditar(true)
+	}
+	//preguntar
+	const cambiarTitulo = (event) => {
+		setNuevoTitulo(event.target.value)
 
-  function mapearIconoSegunExtension(contenido) {
-    return mapaIconoExtension[contenido.extension]
-  }
+	}
 
+	function mapearIconoSegunExtension(contenido) {
+		return mapaIconoExtension[contenido.extension]
+	}
 
-  const cambiarTitulo = (event) => {
-    setNuevoTitulo(event.target.value)
-  }
+	return (
+		<Grid item xs={3}>
+			<Card className={'glass-background-item'}>
+				<CardContent sx={{ background: 'radial-gradient(100% 2294.72% at 0% 0%, rgba(255, 255, 255, 0.56) 0%, rgba(255, 255, 255, 0.24) 99.48%)' }}>
+					<Grid container sx={{ justifyContent: 'space-around' }}>
+						<Grid item xs={8}>
+							<Chip sx={{ color: '#000000', fontWeight: '700', background: 'radial-gradient(100% 1118.07% at 0% 0%, rgba(12, 111, 246, 0.6) 0%, rgba(0, 235, 247, 0.6) 100%)' }}
+								label={props.contenido.fechaPublicacion}></Chip>
+						</Grid>
+						<Grid item xs={2}>
+							<Link href={`localhost:8080/contenidos/${props.contenido.idContenido}`} download>
+								<Button size="small">
+									<DownloadForOfflineRoundedIcon fontSize="large" />
+								</Button>
+							</Link>
 
-  return (
-    <Grid item xs={3}>
-      <Card className={'glass-background-item'}>
-        <CardContent sx={{ background: 'radial-gradient(100% 2294.72% at 0% 0%, rgba(255, 255, 255, 0.56) 0%, rgba(255, 255, 255, 0.24) 99.48%)' }}>
-          <Grid container sx={{justifyContent: 'space-around'}}>
-            <Grid item xs={8}>
-              <Chip sx={{ color: '#000000', fontWeight: '700', background: 'radial-gradient(100% 1118.07% at 0% 0%, rgba(12, 111, 246, 0.6) 0%, rgba(0, 235, 247, 0.6) 100%)' }}
-                label={props.contenido.fechaPublicacion}></Chip>
-            </Grid>
-            <Grid item xs={2}>
-              <Button size="small">
-                <DownloadForOfflineRoundedIcon fontSize="large"></DownloadForOfflineRoundedIcon>
-              </Button>
-            </Grid>
-          </Grid>
-          <Typography variant="h5" component="div">
-            {props.contenido.titulo}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Grid container sx={{justifyContent: 'space-between'}}>
-            <Grid item xs={4}>
-              <Button variant="text" sx={{ color: '#0C6FF6' }}>
-                {mapearIconoSegunExtension(props.contenido)}
-              </Button>
-            </Grid>
-            <Grid item xs={4}>
-              <Button size="small" onClick={clickOpenEliminar}>
-                <DeleteForeverOutlinedIcon fontSize="large"></DeleteForeverOutlinedIcon>
-              </Button>
-              <Dialog open={openEliminar}>
-                <DialogTitle id="alert-dialog-title">{'Eliminar'}</DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    ¿Esta seguro que desea eliminar?
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={close}>No</Button>
-                  <Button onClick={eliminar} autoFocus>
-                    Si
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </Grid>
-            <Grid item xs={4}>
-              <Button size="small" onClick={clickOpenEditar}>
-                <ModeOutlinedIcon fontSize="large"></ModeOutlinedIcon>
-              </Button>
-              <Dialog open={openEditar}>
-                <DialogTitle id="alert-dialog-title">{'Editar'}</DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    Nombre
-                  </DialogContentText>
-                  <Input
-                    value={nuevoTitulo}
+						</Grid>
+					</Grid>
+					<Typography variant="h5" component="div">
+						{props.contenido.titulo}
+					</Typography>
+				</CardContent>
+				<CardActions>
+					<Grid container sx={{ justifyContent: 'space-between' }}>
+						<Grid item xs={4}>
+							<Button variant="text" sx={{ color: '#0C6FF6' }}>
+								{mapearIconoSegunExtension(props.contenido)}
+							</Button>
+						</Grid>
+						<Grid item xs={4}>
+							<Button size="small" onClick={clickOpenEliminar}>
+								<DeleteForeverOutlinedIcon fontSize="large"></DeleteForeverOutlinedIcon>
+							</Button>
+							<Dialog open={openEliminar}>
+								<DialogTitle id="alert-dialog-title">{'Eliminar'}</DialogTitle>
+								<DialogContent>
+									<DialogContentText id="alert-dialog-description">
+										¿Esta seguro que desea eliminar?
+									</DialogContentText>
+								</DialogContent>
+								<DialogActions>
+									<Button onClick={close}>No</Button>
+									<Button onClick={aceptarEliminar} autoFocus>
+										Si
+									</Button>
+								</DialogActions>
+							</Dialog>
+						</Grid>
+						<Grid item xs={4}>
+							<Button size="small" onClick={clickOpenEditar}>
+								<ModeOutlinedIcon fontSize="large"></ModeOutlinedIcon>
+							</Button>
+							<Dialog open={openEditar}>
+								<DialogTitle id="alert-dialog-title">{'Editar'}</DialogTitle>
+								<DialogContent>
+									<DialogContentText id="alert-dialog-description">
+										Nombre
+									</DialogContentText>
+									<Input
+										value={nuevoTitulo}
                   /*onChange={(event) => setNombre(event.target.value)}*/ onChange={
-                      cambiarTitulo
-                    }
-                  ></Input>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={close}>Cancelar</Button>
-                  <Button onClick={aceptarEdicion} autoFocus>
-                    Aceptar
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </Grid>
-          </Grid>
-        </CardActions>
-      </Card>
-    </Grid>
+											cambiarTitulo
+										}
+									></Input>
+								</DialogContent>
+								<DialogActions>
+									<Button onClick={close}>Cancelar</Button>
+									<Button onClick={aceptarEdicion} autoFocus>
+										Aceptar
+									</Button>
+								</DialogActions>
+							</Dialog>
+						</Grid>
+					</Grid>
+				</CardActions>
+			</Card>
+		</Grid>
 
-    // <ListItem
-    // sx={{width: '90%', display: 'flex', justifyContent: 'space-between'}}
-    // className='glass-background-item'
-    // >
-    //   {icono}
-    //   <Typography>{nombreContenido}</Typography>
-    //   {botonDeAccionContenido}
-    // </ListItem>
-  )
+		// <ListItem
+		// sx={{width: '90%', display: 'flex', justifyContent: 'space-between'}}
+		// className='glass-background-item'
+		// >
+		//   {icono}
+		//   <Typography>{nombreContenido}</Typography>
+		//   {botonDeAccionContenido}
+		// </ListItem>
+	)
 }
 
 ListItemContenido.propTypes = {
-  icono: PropTypes.object,
-  botonDeAccionContenido: PropTypes.object,
-  contenido: PropTypes.object,
-  editar: PropTypes.func,
-  eliminar: PropTypes.func,
+	icono: PropTypes.object,
+	botonDeAccionContenido: PropTypes.object,
+	contenido: PropTypes.object,
+	editar: PropTypes.func,
+	eliminar: PropTypes.func,
 }
 
 export default ListItemContenido
