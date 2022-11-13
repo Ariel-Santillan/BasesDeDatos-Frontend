@@ -16,8 +16,8 @@ class Service {
 
 	}
 
-	async getData(textoBusqueda) {
-		//console.log("texto" + textoBusqueda)
+	async getData(textoBusqueda,categoria) {
+		console.log("texto" + textoBusqueda + categoria)
 		// const contenidosJson = await axios.get(`http://localhost:8080/contenido`)
 		//return contenidosJson.data.map((contenido) => Contenido.fromJson(contenido))
 		return contenidoMockeado.filter(contenido => contenido.titulo.toLowerCase().startsWith(textoBusqueda.toLowerCase()))

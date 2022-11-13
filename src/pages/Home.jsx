@@ -9,7 +9,7 @@ import ScrollBarCategoria from '../moleculas/ScrollBarCategoria/ScrollBarCategor
 export default function Home(props) {
 
   return <>
-    <ScrollBarCategoria />
+    <ScrollBarCategoria categoriaActiva={props.categoriaActiva} setCategoriaActiva={props.setCategoriaActiva} />
     <Container sx={{paddingTop: '2%'}}>
       <Grid container spacing={2}>
         {props.contenidos.map((contenido, index) =>
@@ -31,4 +31,6 @@ Home.propTypes = {
 	contenidos: PropTypes.array,
 	editar: PropTypes.func,
 	eliminar: PropTypes.func,
+  categoriaActiva: PropTypes.number,
+  setCategoriaActiva: PropTypes.func,
 }

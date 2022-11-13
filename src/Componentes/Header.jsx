@@ -8,10 +8,9 @@ import SearchIcon from '@mui/icons-material/Search'
 import { styled, alpha, createTheme } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 import Avatar from '@mui/material/Avatar'
-import { useEffect, useState } from 'react'
-import { service } from '../service/Service'
 import Drawer from '@mui/material/Drawer'
 import SideBar from '../organismos/SideBar'
+import { useState } from 'react'
 
 const theme = createTheme({
 	palette: {
@@ -31,20 +30,8 @@ const theme = createTheme({
 })
 
 export default function Header(props) {
-	const [textoBusqueda, setTextoBusqueda] = useState('')
+	
 	const [estaDesplegado, setEstaDesplegado] = useState(false)
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const contenidosFiltrados = await service.getData(textoBusqueda)
-			props.setContenidos(contenidosFiltrados)
-		}
-		try {
-			fetchData()
-		} catch (error) {
-			console.log(error)
-		}
-	}, [textoBusqueda])
 
 	const SearchIconWrapper = styled('div')(({ theme }) => ({
 		padding: theme.spacing(0, 2),
@@ -118,9 +105,9 @@ export default function Header(props) {
 						</SearchIconWrapper>
 						<TextField
 							sx={textFieldStyle}
-							value={textoBusqueda}
+							value={props.textoBusqueda}
 							placeholder='Buscar...'
-							onChange={(event) => setTextoBusqueda(event.target.value)}
+							onChange={(event) => props.setTextoBusqueda(event.target.value)}
 						/>
 					</Box>
 					<IconButton color="inherit" sx={{ marginLeft: "auto" }}>
@@ -133,6 +120,8 @@ export default function Header(props) {
 }
 
 Header.propTypes = {
-	setContenidos: PropTypes.func
+	setContenidos: PropTypes.func,
+	textoBusqueda: PropTypes.string,
+	setTextoBusqueda: PropTypes.func,
 }
 
