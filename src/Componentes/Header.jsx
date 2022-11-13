@@ -70,6 +70,7 @@ export default function Header(props) {
 			marginLeft: theme.spacing(3),
 			width: 'auto',
 		},
+		visibility: `${ocultarBarraDeBusquedaParaPaginaReporte()}`
 	}
 
 	const textFieldStyle = {
@@ -79,6 +80,10 @@ export default function Header(props) {
 		'& .MuiInputBase-root': {
 			borderRadius: theme.shape.borderRadius,
 		}
+	}
+
+	function ocultarBarraDeBusquedaParaPaginaReporte() {
+		return window.location.pathname === '/reporte' ? 'hidden' : 'visible'
 	}
 
 	return (
@@ -107,14 +112,14 @@ export default function Header(props) {
 						<SideBar cerrarModal={() => setEstaDesplegado(false)}></SideBar>
 					</Drawer>
 
-					<Box sx={searchStyle}>
+					<Box sx={searchStyle} >
 						<SearchIconWrapper>
 							<SearchIcon theme={theme} color="icono" />
 						</SearchIconWrapper>
 						<TextField
 							sx={textFieldStyle}
 							value={textoBusqueda}
-							placeholder='Search...'
+							placeholder='Buscar...'
 							onChange={(event) => setTextoBusqueda(event.target.value)}
 						/>
 					</Box>
