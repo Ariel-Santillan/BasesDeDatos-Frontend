@@ -10,7 +10,7 @@
 
 # production
 /build
-
+/public/contenidos
 # misc
 .DS_Store
 .env.local
