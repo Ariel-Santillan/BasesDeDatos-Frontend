@@ -121,7 +121,8 @@ const ListItemContenido = (props) => {
                 </Button>
                : 
                 <Link
-                  href={`localhost:8080/contenidos/${props.contenido.idContenido}`}
+                  // href={`localhost:8080/contenidos/${props.contenido.idContenido}`}
+                  href={`${props.contenido.url}`}
                   download
                 >
                   <Button size="small">
