@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import ListItemContenido from "../atomos/ListItemContenido/ListItemContenido"
 import ScrollBarCategoria from '../moleculas/ScrollBarCategoria/ScrollBarCategoria'
 
+
 export default function Home(props) {
 
   return <>
@@ -14,10 +15,11 @@ export default function Home(props) {
         {props.contenidos.map((contenido, index) =>
         <ListItemContenido
           key={index}
-          botonDeAccionContenido={<ArrowCircleDownRoundedIcon fontSize='large'></ArrowCircleDownRoundedIcon>}
+          botonDeAccionContenido={<ArrowCircleDownRoundedIcon fontSize='large'/>}
           contenido={contenido}
           editar={props.editar}
-					eliminar={props.eliminar}>
+					eliminar={props.eliminar}
+          >
         </ListItemContenido>
         )}
       </Grid>

@@ -2,6 +2,9 @@ export class Contenido {
   constructor() {
     this.idContenido = 0
     this.titulo = ''
+    this.extension=''
+    this.fechaPublicacion=Date
+    this.categoria=''
   }
 
   static fromJson(contenido) {
