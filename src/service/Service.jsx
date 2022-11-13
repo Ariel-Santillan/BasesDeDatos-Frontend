@@ -1,7 +1,7 @@
 const contenidoMockeado = [
-	{ idContenido: 0, titulo: 'cars', extension: 'PDF', fechaPublicacion: '11/02/22' },
-	{ idContenido: 1, titulo: 'Coco', extension: 'DOCX', fechaPublicacion: '11/02/22' },
-	{ idContenido: 2, titulo: 'Casablanca', extension: 'MP4', fechaPublicacion: '11/02/22', linkVideo:'jjjjjj' }
+	{ idContenido: 0, titulo: 'cars', extension: 'PDF', fechaPublicacion: '11/02/22', url: '/contenidos/descarga.jpeg' },
+	{ idContenido: 1, titulo: 'Coco', extension: 'DOCX', fechaPublicacion: '11/02/22', url: '/contenidos/ImagenPrueba.txt' },
+	{ idContenido: 2, titulo: 'Casablanca', extension: 'MP4', fechaPublicacion: '11/02/22', url: '/contenidos/descarga.jpeg' }
 ]
 
 class Service {
