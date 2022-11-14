@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
+import MovieCreationIcon from '@mui/icons-material/MovieCreation'
 
 //import Box from '@mui/material/Box'
 import { useState } from 'react'
@@ -34,7 +35,7 @@ const mapaIconoExtension = {
   PDF: <PictureAsPdfIcon fontSize="large"></PictureAsPdfIcon>,
   DOCX: <ArticleIcon fontSize="large"></ArticleIcon>,
   MP3: <AudiotrackIcon fontSize="large"></AudiotrackIcon>,
-  MP4: <AudiotrackIcon fontSize="large"></AudiotrackIcon>,
+  MP4: <MovieCreationIcon fontSize="large"></MovieCreationIcon>,
   WAV: <OndemandVideoIcon fontSize="large"></OndemandVideoIcon>,
 }
 
@@ -90,7 +91,7 @@ const ListItemContenido = (props) => {
   }
 
   function mapearIconoSegunExtension(contenido) {
-    return mapaIconoExtension[contenido.extension]
+    return mapaIconoExtension[contenido.extension.toUpperCase()]
   }
 
 
@@ -126,7 +127,7 @@ const ListItemContenido = (props) => {
 			}
 
               <Dialog open={openVisualizar}>
-                <DialogContent><video controls controlsList="nodownload" width='100%' height='auto' src="https://joy.videvo.net/videvo_files/video/free/video0455/large_watermarked/_import_609113a1be0e89.39394997_preview.mp4"></video></DialogContent>
+                <DialogContent><video controls controlsList="nodownload" width='100%' height='auto' src={props.contenido.url}></video></DialogContent>
                 <DialogActions>
                   <Button onClick={close}>Cerrar</Button>
                 </DialogActions>

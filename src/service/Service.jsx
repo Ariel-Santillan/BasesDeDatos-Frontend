@@ -1,6 +1,6 @@
 
 import axios from "axios"
-//import Contenido from "../dominio/Contenido"
+import Contenido from "../dominio/Contenido"
 
 
 const contenidoMockeado = [
@@ -28,11 +28,9 @@ class Service {
 
 	async getData(textoBusqueda, categoria) {
 		console.log("texto" + textoBusqueda + categoria)
-		//const contenidosJson = await axios.get(urlConsultaBackend('/getAll'))
-		//console.log(contenidosJson)
-		//return contenidosJson.data.map((contenido) => Contenido.fromJson(contenido))
-		return contenidoMockeado.filter(contenido => contenido.titulo.toLowerCase().startsWith(textoBusqueda.toLowerCase()))
-
+		const contenidosJson = await axios.get(urlConsultaBackend('/getAll'))
+		console.log(contenidosJson)
+		return contenidosJson.data.map((contenido) => Contenido.fromJson(contenido))
 	}
 
 	async subirArchivo(nombre, extension, archivo) {
