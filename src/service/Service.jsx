@@ -23,6 +23,12 @@ class Service {
 		return contenidoMockeado.filter(contenido => contenido.titulo.toLowerCase().startsWith(textoBusqueda.toLowerCase()))
 	}
 
+	async subirArchivo(nombre, extension, archivo) {
+		//return await axios.post(`http://localhost:9000/guardarElContenido`.Contenido.toJson(idContenido,nombre))
+
+	}
+
+
 }
 
 
