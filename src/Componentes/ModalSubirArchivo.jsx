@@ -11,6 +11,8 @@ import DialogContentText from '@mui/material/DialogContentText'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
+import { service } from '../service/Service'
+
 export default function ModalSubirArchivo(props) {
   const [archivo, setArchivo] = useFileUpload()
 
@@ -20,12 +22,12 @@ export default function ModalSubirArchivo(props) {
   }, [archivo])
 
   //aca se va a llamar al service con los datos que necesite
-  const aceptarNuevoArchivo = () => {
+  const aceptarNuevoArchivo = async () => {
     const [nombre, extension] = archivo.name.split('.')
     console.log(nombre)
     console.log(extension)
     console.log(archivo.file)
-    //await service.subirArchivo(nombre,extension,archivo.file)
+    await service.subirArchivo(nombre,extension,archivo.file)
     props.close()
   }
 
