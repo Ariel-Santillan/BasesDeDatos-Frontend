@@ -3,7 +3,7 @@ export class Contenido {
     this.idContenido = 0
     this.titulo = ''
     this.extension=''
-    this.fechaPublicacion=Date
+    this.fechaPublicacion=''
     this.categoria=''
   }
 
@@ -27,3 +27,5 @@ export class Contenido {
   // return titulo.toLowerCase().includes(textoMinuscula) || this.texto.toLowerCase().includes(textoMinuscula)
   //}
 }
+
+export default Contenido
