@@ -1,5 +1,6 @@
+
 import axios from "axios"
-import Contenido from "../dominio/Contenido"
+//import Contenido from "../dominio/Contenido"
 
 
 const contenidoMockeado = [
@@ -27,15 +28,17 @@ class Service {
 
 	async getData(textoBusqueda, categoria) {
 		console.log("texto" + textoBusqueda + categoria)
-		const contenidosJson = await axios.get(urlConsultaBackend('/getAll'))
-		console.log(contenidosJson)
-		return contenidosJson.data.map((contenido) => Contenido.fromJson(contenido))
+		//const contenidosJson = await axios.get(urlConsultaBackend('/getAll'))
+		//console.log(contenidosJson)
+		//return contenidosJson.data.map((contenido) => Contenido.fromJson(contenido))
+		return contenidoMockeado.filter(contenido => contenido.titulo.toLowerCase().startsWith(textoBusqueda.toLowerCase()))
+
 	}
 
 	async subirArchivo(nombre, extension, archivo) {
 		const contenidoYArchivoAsociado = new FormData()
 		contenidoYArchivoAsociado.append("contenidoG", JSON.stringify({ TITULO: nombre, EXTENSION: extension }))
-		let buffer = await archivo.arrayBuffer()
+		const buffer = await archivo.arrayBuffer()
 		contenidoYArchivoAsociado.append("archivo", buffer)
 		console.log(buffer)
 		const opciones = {
@@ -43,11 +46,11 @@ class Service {
 				"Content-Type": "multipart/form-data"
 			}
 		}
-		return await axios({
+		return axios({
 			method: 'POST',
 			url: urlConsultaBackend('/guardarElContenido'),
 			data: contenidoYArchivoAsociado,
-			config: opciones
+			config: opciones,
 		})
 	}
 

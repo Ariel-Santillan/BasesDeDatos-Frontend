@@ -6,11 +6,11 @@ import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
+
 //import Box from '@mui/material/Box'
 import { useState } from 'react'
 import LaunchIcon from '@mui/icons-material/Launch'
-import DownloadForOfflineRoundedIcon from '@mui/icons-material/DownloadForOfflineRounded'
+import { BotonDescarga } from '../../componentes/BotonDescarga'
 import ModeOutlinedIcon from '@mui/icons-material/ModeOutlined'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import Chip from '@mui/material/Chip'
@@ -93,6 +93,8 @@ const ListItemContenido = (props) => {
     return mapaIconoExtension[contenido.extension]
   }
 
+
+
   return (
     <Grid item xs={3}>
       <Card className={'glass-background-item'}>
@@ -120,16 +122,8 @@ const ListItemContenido = (props) => {
                   <LaunchIcon />
                 </Button>
                : 
-                <Link
-                  // href={`localhost:8080/contenidos/${props.contenido.idContenido}`}
-                  href={`${props.contenido.url}`}
-                  download
-                >
-                  <Button size="small">
-                    <DownloadForOfflineRoundedIcon />
-                  </Button>
-                </Link>
-              }
+               <BotonDescarga contenido={props.contenido}/>
+			}
 
               <Dialog open={openVisualizar}>
                 <DialogContent><video controls controlsList="nodownload" width='100%' height='auto' src="https://joy.videvo.net/videvo_files/video/free/video0455/large_watermarked/_import_609113a1be0e89.39394997_preview.mp4"></video></DialogContent>
@@ -181,7 +175,7 @@ const ListItemContenido = (props) => {
                   </DialogContentText>
                   <Input
                     value={nuevoTitulo}
-                    /*onChange={(event) => setNombre(event.target.value)}*/ onChange={
+                    onChange={
                       cambiarTitulo
                     }
                   ></Input>
