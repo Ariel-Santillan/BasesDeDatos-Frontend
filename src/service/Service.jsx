@@ -29,13 +29,13 @@ class Service {
 	async getData(textoBusqueda, categoria) {
 		console.log("texto" + textoBusqueda + categoria)
 		let contenidosJson = {}
-		if(categoria !== "Todos") {
+		if (categoria !== "Todos") {
 			contenidosJson = await axios.get(urlConsultaBackend('/contenidos-por-categoria', categoria))
 		}
-		if(textoBusqueda) {
-			contenidosJson = {}
+		if (textoBusqueda) {
+			contenidosJson = await axios.get(urlConsultaBackend('/contenidos-por-titulo'), { params: { titulo: textoBusqueda } })
 		}
-		if(!textoBusqueda) {
+		if (!textoBusqueda) {
 			contenidosJson = await axios.get(urlConsultaBackend('/getAll'))
 		}
 		console.log(contenidosJson)
