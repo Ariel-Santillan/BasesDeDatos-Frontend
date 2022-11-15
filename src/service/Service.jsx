@@ -20,9 +20,9 @@ class Service {
 		await axios.delete(urlConsultaBackend('/delete/' + idContenido))
 	}
 
-	async editarContenido(idContenido, nombre) {
+	async editarContenido(idContenido, nombre, extension) {
 		console.log("editar " + idContenido + nombre)
-		// return await axios.put(`http://localhost:8080/contenido/{idContenido}`.Contenido.toJson(idContenido,nombre))
+		return await axios.put(urlConsultaBackend(`/actualizarContenido/${idContenido}`),Contenido.toJson(idContenido,nombre, extension))
 
 	}
 

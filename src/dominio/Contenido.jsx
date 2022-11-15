@@ -15,10 +15,11 @@ export class Contenido {
     )
   }
 
-  static toJson(idContenido, nombre) {
+  static toJson(idContenido, nombre, extension) {
     return {
       idContenido: idContenido,
-      nombre: nombre
+      titulo: nombre,
+      extension: extension 
     }
   }
 

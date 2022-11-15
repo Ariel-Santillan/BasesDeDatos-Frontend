@@ -59,7 +59,8 @@ const ListItemContenido = (props) => {
     try {
       await service.editarContenido(
         props.contenido.idContenido,
-        props.contenido.titulo,
+        nuevoTitulo,
+        props.contenido.extension
       )
       props.editar(props.contenido.idContenido, nuevoTitulo)
     } catch (e) {
