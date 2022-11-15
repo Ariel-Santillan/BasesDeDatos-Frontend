@@ -28,7 +28,16 @@ class Service {
 
 	async getData(textoBusqueda, categoria) {
 		console.log("texto" + textoBusqueda + categoria)
-		const contenidosJson = await axios.get(urlConsultaBackend('/getAll'))
+		let contenidosJson = {}
+		if(categoria !== "Todos") {
+			contenidosJson = await axios.get(urlConsultaBackend('/contenidos-por-categoria', categoria))
+		}
+		if(textoBusqueda) {
+			contenidosJson = {}
+		}
+		if(!textoBusqueda) {
+			contenidosJson = await axios.get(urlConsultaBackend('/getAll'))
+		}
 		console.log(contenidosJson)
 		return contenidosJson.data.map((contenido) => Contenido.fromJson(contenido))
 	}
