@@ -17,7 +17,7 @@ function urlConsultaBackend(path) {
 class Service {
 	async eliminarContenido(idContenido) {
 		console.log("borrado " + idContenido)
-		// await axios.delete(`http://localhost:8080/contenido/{idContenido}`+idContenido)
+		await axios.delete(urlConsultaBackend('/delete/' + idContenido))
 	}
 
 	async editarContenido(idContenido, nombre) {
