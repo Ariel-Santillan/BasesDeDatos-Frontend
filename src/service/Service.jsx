@@ -53,13 +53,16 @@ class Service {
 
 	async subirArchivo(nombre, extension, archivo) {
 		const contenidoYArchivoAsociado = new FormData()
-		contenidoYArchivoAsociado.append("contenidoG", JSON.stringify({ TITULO: nombre, EXTENSION: extension }))
-		const buffer = await archivo.arrayBuffer()
-		contenidoYArchivoAsociado.append("archivo", buffer)
-		console.log(buffer)
+		const contenidoAGuardar = { TITULO: nombre, EXTENSION: extension }
+		const blob = new Blob(
+			[JSON.stringify(contenidoAGuardar)]
+			, { type: "application/json" })
+		contenidoYArchivoAsociado.append("contenidoG", blob) 
+		contenidoYArchivoAsociado.append("archivo", archivo)
+		console.log(contenidoYArchivoAsociado.headers)
 		const opciones = {
 			headers: {
-				"Content-Type": "multipart/form-data"
+				'Content-Type': "multipart/form-data"
 			}
 		}
 		return axios({

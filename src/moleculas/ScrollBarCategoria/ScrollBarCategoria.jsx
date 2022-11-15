@@ -17,7 +17,7 @@ function ScrollBarCategoria(props) {
 		} catch (error) {
 			console.log(error)
 		}
-	}, [categorias])
+	}, [])
 
     return <Box sx={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: 'nowrap', maxWidth: '100%' }}>
         {[{nombre: "TODOS"}, ...categorias].map((categoria, index) =>

@@ -11,11 +11,8 @@ import DialogContentText from '@mui/material/DialogContentText'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import FormLabel from '@mui/material/FormLabel'
-import FormControl from '@mui/material/FormControl'
-import FormGroup from '@mui/material/FormGroup'
+
 import FormControlLabel from '@mui/material/FormControlLabel'
-import FormHelperText from '@mui/material/FormHelperText'
 import Checkbox from '@mui/material/Checkbox'
 
 import { service } from '../service/Service'
@@ -41,7 +38,7 @@ export default function ModalSubirArchivo(props) {
     } catch (error) {
       console.log(error)
     }
-  }, [categoriasAMostrar])
+  }, [])
 
   function cargarCategoria(categoria) {
     setCategoriasContenido([...categoriasContenido, categoria])
