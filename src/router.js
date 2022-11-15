@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Reporte from './pages/Reporte'
-import Header from './componentes/Header'
+import Header from './Componentes/Header'
 import { useState, useEffect } from 'react'
 import {service} from './service/Service'
 
@@ -32,6 +32,10 @@ export const AppRoute = () => {
 		setContenidos(contenidosNuevos)
 	}
 
+	const visualizar = async (idContenido) => {
+		
+	}
+
 	return (
 		<>
 			<Header setContenidos={setContenidos} textoBusqueda={textoBusqueda}
@@ -40,6 +44,7 @@ export const AppRoute = () => {
 				<Route path="/" exact element={<Home
 					editar={editar}
 					eliminar={eliminar}
+					visualizar={visualizar}
 					contenidos={contenidos}
 					categoriaActiva={categoriaActiva}
 					setCategoriaActiva={setCategoriaActiva}

@@ -51,6 +51,11 @@ class Service {
 		await axios.post(urlConsultaBackend("/descarga"), descarga)
 	}
 
+	async guardarVisualizacion(contenidoVisualizado) {
+		var urlVideo = await axios.post(urlConsultaBackend('/reproduccion/' + contenidoVisualizado.idContenido), contenidoVisualizado)
+		return urlVideo
+	}
+
 	async subirArchivo(nombre, extension, archivo) {
 		const contenidoYArchivoAsociado = new FormData()
 		const contenidoAGuardar = { titulo: nombre, extension: extension.toUpperCase() }

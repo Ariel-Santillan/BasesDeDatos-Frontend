@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import ListItemContenido from '../atomos/ListItemContenido/ListItemContenido'
 import ScrollBarCategoria from '../moleculas/ScrollBarCategoria/ScrollBarCategoria'
 import Button from '@mui/material/Button'
-import ModalSubirArchivo from '../componentes/ModalSubirArchivo'
+import ModalSubirArchivo from '../Componentes/ModalSubirArchivo'
 import { useState } from 'react'
 
 
@@ -46,6 +46,7 @@ export default function Home(props) {
               contenido={contenido}
               editar={props.editar}
               eliminar={props.eliminar}
+              visualizar={props.visualizar}
             ></ListItemContenido>
           )}
         </Grid>
@@ -60,4 +61,5 @@ Home.propTypes = {
   eliminar: PropTypes.func,
   categoriaActiva: PropTypes.string,
   setCategoriaActiva: PropTypes.func,
+  visualizar: PropTypes.func,
 }

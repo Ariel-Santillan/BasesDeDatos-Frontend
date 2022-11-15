@@ -11,7 +11,7 @@ import MovieCreationIcon from '@mui/icons-material/MovieCreation'
 //import Box from '@mui/material/Box'
 import { useState } from 'react'
 import LaunchIcon from '@mui/icons-material/Launch'
-import { BotonDescarga } from '../../componentes/BotonDescarga'
+import { BotonDescarga } from '../../Componentes/BotonDescarga'
 import ModeOutlinedIcon from '@mui/icons-material/ModeOutlined'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import Chip from '@mui/material/Chip'
@@ -83,7 +83,19 @@ const ListItemContenido = (props) => {
     setOpenEditar(true)
   }
 
-  const clickOpenVisualizar = () => {
+  const clickOpenVisualizar = async () => {
+    const contenidoVisualizado = {
+      idUsuario: 1,
+      idContenido: props.contenido.idContenido,
+      soUsado: 'Windows',
+      fechaInicio: new Date(),
+      fechaFin: new Date(),
+      horaInicio: new Date().toLocaleTimeString("es-ES"),
+      horaFin: new Date().toLocaleTimeString("es-ES"),
+    }
+    var urlVideo = await service.guardarVisualizacion(contenidoVisualizado)
+    props.visualizar(props.contenido.idContenido)
+    console.log(urlVideo.data)
     setOpenVisualizar(true)
   }
   //preguntar
@@ -128,7 +140,8 @@ const ListItemContenido = (props) => {
 			}
 
               <Dialog open={openVisualizar}>
-                <DialogContent><video controls controlsList="nodownload" width='100%' height='auto' href={`localhost:9090:${props.contenido.url}`}></video></DialogContent>
+                <a href="C:/Users/ariel/Desktop/Base de Datos/TP Integrador/demo/BasesDeDatos-Backend/contenidos/prueba front 2.mp4" ></a>
+                {/* <DialogContent><video controls controlsList="nodownload" width='100%' height='auto' src={'/C:/Users/ariel/Desktop/Base de Datos/TP Integrador/demo/BasesDeDatos-Backend/contenidos/prueba front 2.mp4'}></video></DialogContent> */}
                 <DialogActions>
                   <Button onClick={close}>Cerrar</Button>
                 </DialogActions>
@@ -213,6 +226,7 @@ ListItemContenido.propTypes = {
   editar: PropTypes.func,
   eliminar: PropTypes.func,
   IconoDeAccion: PropTypes.func,
+  visualizar: PropTypes.func,
 }
 
 export default ListItemContenido
