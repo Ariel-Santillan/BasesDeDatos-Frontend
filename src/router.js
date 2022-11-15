@@ -3,17 +3,16 @@ import Home from './pages/Home'
 import Reporte from './pages/Reporte'
 import Header from './componentes/Header'
 import { useState, useEffect } from 'react'
-import categorias from './categoriasMock'
 import {service} from './service/Service'
 
 export const AppRoute = () => {
 	const [contenidos, setContenidos] = useState([])
-	const [categoriaActiva, setCategoriaActiva] = useState(0)
+	const [categoriaActiva, setCategoriaActiva] = useState("TODOS")
 	const [textoBusqueda, setTextoBusqueda] = useState('')
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const contenidosFiltrados = await service.getData(textoBusqueda,categorias[categoriaActiva])
+			const contenidosFiltrados = await service.getData(textoBusqueda,categoriaActiva)
 			setContenidos(contenidosFiltrados)
 		}
 		try {

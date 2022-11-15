@@ -27,9 +27,9 @@ class Service {
 	}
 
 	async getData(textoBusqueda, categoria) {
-		console.log("texto" + textoBusqueda + categoria)
+		console.log("texto" + textoBusqueda + "texto categoria: " + categoria)
 		let contenidosJson = {}
-		if (categoria !== "Todos") {
+		if (categoria !== "TODOS") {
 			contenidosJson = await axios.get(urlConsultaBackend('/contenidos-por-categoria', categoria))
 		}
 		if (textoBusqueda) {
@@ -40,6 +40,11 @@ class Service {
 		}
 		console.log(contenidosJson)
 		return contenidosJson.data.map((contenido) => Contenido.fromJson(contenido))
+	}
+
+	async buscarCategorias() {
+		const categorias = await axios.get(urlConsultaBackend("/categorias"))
+		return categorias
 	}
 
 	async guardarDescarga(descarga) {

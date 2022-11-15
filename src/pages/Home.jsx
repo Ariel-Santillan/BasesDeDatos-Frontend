@@ -58,6 +58,6 @@ Home.propTypes = {
   contenidos: PropTypes.array,
   editar: PropTypes.func,
   eliminar: PropTypes.func,
-  categoriaActiva: PropTypes.number,
+  categoriaActiva: PropTypes.string,
   setCategoriaActiva: PropTypes.func,
 }

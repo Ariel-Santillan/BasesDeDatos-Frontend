@@ -11,7 +11,7 @@ function ChipDescarga({texto,estaClickeado,index,setCategoriaActiva}) {
         sx={{margin: '1% 2% 1% 2%'}}
         label={texto}
         className={estaClickeado ? 'glass-background-esta-clickeado' : 'glass-background'}
-        onClick={() => setCategoriaActiva(index)}
+        onClick={() => setCategoriaActiva(texto)}
     />
 }
 
