@@ -135,7 +135,7 @@ const ListItemContenido = (props) => {
               </Dialog>
             </Grid>
           </Grid>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="div" sx={{wordWrap: 'break-word'}}>
             {props.contenido.titulo}
           </Typography>
         </CardContent>
