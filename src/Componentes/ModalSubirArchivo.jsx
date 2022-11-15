@@ -4,22 +4,49 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useFileUpload } from 'use-file-upload'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import DialogContentText from '@mui/material/DialogContentText'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
+import FormLabel from '@mui/material/FormLabel'
+import FormControl from '@mui/material/FormControl'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormHelperText from '@mui/material/FormHelperText'
+import Checkbox from '@mui/material/Checkbox'
+
 import { service } from '../service/Service'
 
 export default function ModalSubirArchivo(props) {
   const [archivo, setArchivo] = useFileUpload()
+  const [categoriasAMostrar, setCategoriasAMostrar] = useState([])
+  const [categoriasContenido, setCategoriasContenido] = useState([])
+  const error = categoriasContenido.length < 1
 
   useEffect(() => {
     if (!archivo) return
     console.log(archivo)
   }, [archivo])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const categoriasBackend = await service.buscarCategorias()
+      setCategoriasAMostrar(categoriasBackend.data.map((categoria) => ({ ...categoria, estaChecado: false })))
+    }
+    try {
+      fetchData()
+    } catch (error) {
+      console.log(error)
+    }
+  }, [categoriasAMostrar])
+
+  function cargarCategoria(categoria) {
+    setCategoriasContenido([...categoriasContenido, categoria])
+    console.log("categorias a guardar: ", categoriasContenido)
+  }
 
   //aca se va a llamar al service con los datos que necesite
   const aceptarNuevoArchivo = async () => {
@@ -27,7 +54,7 @@ export default function ModalSubirArchivo(props) {
     console.log(nombre)
     console.log(extension)
     console.log(archivo.file)
-    await service.subirArchivo(nombre,extension,archivo.file)
+    await service.subirArchivo(nombre, extension, archivo.file)
     props.close()
   }
 
@@ -36,12 +63,12 @@ export default function ModalSubirArchivo(props) {
       <DialogTitle id="alert-dialog-title">{'Nuevo archivo'}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Subir
+          Subir...
         </DialogContentText>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           {archivo && <Typography>{archivo.name}</Typography>}
           <Button
-          sx={{marginLeft:'auto'}}
+            sx={{ marginLeft: 'auto' }}
             onClick={() =>
               setArchivo({
                 accept: 'audio/*,video/*,.txt,.docx,.doc,.pdf,.gif',
@@ -50,6 +77,16 @@ export default function ModalSubirArchivo(props) {
           >
             <FileUploadIcon fontSize="large" />
           </Button>
+        </Box>
+        <Typography>¿A qu&eacute; categor&iacute;a pertenece?</Typography>
+        <br/>
+        <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+          {categoriasAMostrar.map((categoria, index) => <FormControlLabel key={categoria.id}
+            control={
+              <Checkbox checked={categoria.estaChecado} onChange={() => cargarCategoria(categoria)} name={categoria.nombre} />
+            }
+            label={categoria.nombre}
+          />)}
         </Box>
       </DialogContent>
       <DialogActions>
