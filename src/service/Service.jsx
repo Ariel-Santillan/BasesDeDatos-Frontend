@@ -33,6 +33,10 @@ class Service {
 		return contenidosJson.data.map((contenido) => Contenido.fromJson(contenido))
 	}
 
+	async guardarDescarga(descarga) {
+		await axios.post(urlConsultaBackend("/descarga"), descarga)
+	}
+
 	async subirArchivo(nombre, extension, archivo) {
 		const contenidoYArchivoAsociado = new FormData()
 		contenidoYArchivoAsociado.append("contenidoG", JSON.stringify({ TITULO: nombre, EXTENSION: extension }))
