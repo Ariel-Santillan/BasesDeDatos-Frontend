@@ -59,7 +59,7 @@ class Service {
 			, { type: "application/json" })
 		contenidoYArchivoAsociado.append("contenidoG", blob) 
 		contenidoYArchivoAsociado.append("archivo", archivo)
-		console.log(contenidoYArchivoAsociado.headers)
+		
 		const opciones = {
 			headers: {
 				'Content-Type': "multipart/form-data"
