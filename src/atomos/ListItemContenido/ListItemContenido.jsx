@@ -128,7 +128,7 @@ const ListItemContenido = (props) => {
 			}
 
               <Dialog open={openVisualizar}>
-                <DialogContent><video controls controlsList="nodownload" width='100%' height='auto' src={props.contenido.url}></video></DialogContent>
+                <DialogContent><video controls controlsList="nodownload" width='100%' height='auto' href={`localhost:9090:${props.contenido.url}`}></video></DialogContent>
                 <DialogActions>
                   <Button onClick={close}>Cerrar</Button>
                 </DialogActions>
