@@ -53,7 +53,7 @@ class Service {
 
 	async subirArchivo(nombre, extension, archivo) {
 		const contenidoYArchivoAsociado = new FormData()
-		const contenidoAGuardar = { TITULO: nombre, EXTENSION: extension }
+		const contenidoAGuardar = { titulo: nombre, extension: extension }
 		const blob = new Blob(
 			[JSON.stringify(contenidoAGuardar)]
 			, { type: "application/json" })
