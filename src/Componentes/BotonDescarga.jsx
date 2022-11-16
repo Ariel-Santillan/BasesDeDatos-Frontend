@@ -9,7 +9,10 @@ export const BotonDescarga = (props) => {
   const estaLogueado = true
 
   async function guardarDescarga() {
-    const descarga = { velocidadTransferencia: (Math.random() * 7.8).toFixed(2)}
+    const descarga = { 
+      velocidadTransferencia: (Math.random() * 7.8).toFixed(2),
+      idContenido: props.contenido.idContenido
+    }
     console.log(descarga)
     await service.guardarDescarga(descarga)
 
