@@ -3,11 +3,11 @@ import axios from "axios"
 import Contenido from "../dominio/Contenido"
 
 
-const contenidoMockeado = [
-	{ idContenido: 0, titulo: 'cars', extension: 'PDF', fechaPublicacion: '11/02/22', url: '/contenidos/descarga.jpeg' },
-	{ idContenido: 1, titulo: 'Coco', extension: 'DOCX', fechaPublicacion: '11/02/22', url: '/contenidos/ImagenPrueba.txt' },
-	{ idContenido: 2, titulo: 'Casablanca', extension: 'MP4', fechaPublicacion: '11/02/22', url: '/contenidos/descarga.jpeg' }
-]
+//const contenidoMockeado = [
+	//{ idContenido: 0, titulo: 'cars', extension: 'PDF', fechaPublicacion: '11/02/22', url: '/contenidos/descarga.jpeg' },
+	//{ idContenido: 1, titulo: 'Coco', extension: 'DOCX', fechaPublicacion: '11/02/22', url: '/contenidos/ImagenPrueba.txt' },
+	//{ idContenido: 2, titulo: 'Casablanca', extension: 'MP4', fechaPublicacion: '11/02/22', url: '/contenidos/descarga.jpeg' }
+//]
 
 const urlApiBackend = "http://localhost:9000"
 function urlConsultaBackend(path) {
@@ -22,8 +22,8 @@ class Service {
 
 	async editarContenido(idContenido, nombre, extension) {
 		console.log("editar " + idContenido + nombre)
-		return await axios.put(urlConsultaBackend(`/actualizarContenido/${idContenido}`),Contenido.toJson(idContenido,nombre, extension))
-
+		const contenidoEditado = await axios.put(urlConsultaBackend(`/actualizarContenido/${idContenido}`),Contenido.toJson(idContenido,nombre, extension))
+		return contenidoEditado
 	}
 
 	async getData(textoBusqueda, categoria) {

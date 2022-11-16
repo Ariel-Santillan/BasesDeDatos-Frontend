@@ -57,7 +57,7 @@ export default function ModalSubirArchivo(props) {
     window.location.reload()
     }catch{
       // eslint-disable-next-line no-alert
-      alert('Acepta hasta 20 caracteres en el titulo')
+      alert('El titulo del archivo debe tener menos de 50 caracteres')
     }
     
   }
