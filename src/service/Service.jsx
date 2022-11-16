@@ -56,9 +56,9 @@ class Service {
 		return urlVideo
 	}
 
-	async subirArchivo(nombre, extension, archivo) {
+	async subirArchivo(nombre, extension, archivo, categorias) {
 		const contenidoYArchivoAsociado = new FormData()
-		const contenidoAGuardar = { titulo: nombre, extension: extension.toUpperCase() }
+		const contenidoAGuardar = { titulo: nombre, extension: extension.toUpperCase(), categorias: categorias }
 		const blob = new Blob(
 			[JSON.stringify(contenidoAGuardar)]
 			, { type: "application/json" })
@@ -71,12 +71,16 @@ class Service {
 			}
 		}
 		console.log(urlConsultaBackend('/guardar-el-contenido'))
-		return axios({
+		return await axios({
 			method: 'POST',
 			url: urlConsultaBackend('/guardar-el-contenido'),
 			data: contenidoYArchivoAsociado,
 			config: opciones,
 		})
+	}
+
+	async buscarReporte() {
+		return await axios.get(urlConsultaBackend("/reporte-contenidos"))
 	}
 
 

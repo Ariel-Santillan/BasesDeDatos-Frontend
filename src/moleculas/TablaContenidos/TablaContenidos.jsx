@@ -7,9 +7,23 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Container from '@mui/material/Container'
 
-import contenidos from '../../contenidosMock'
+import { useEffect, useState } from 'react'
+import { service } from '../../service/Service'
 
 function TablaContenidos() {
+    const [registrosReporte, setRegistrosReporte] = useState([])
+    
+    useEffect(() => {
+        const fetchData = async () => {
+          const registrosReporte = await service.buscarReporte()
+          setRegistrosReporte(registrosReporte.data)
+        }
+        try {
+          fetchData()
+        } catch (error) {
+          console.log(error)
+        }
+      }, [])
     return <Container sx={{paddingTop: '2%'}}>
         <TableContainer component={Paper}>
             <Table>
@@ -23,18 +37,18 @@ function TablaContenidos() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {contenidos.map(contenido =>
+                    {registrosReporte.map((contenido, index) =>
                         <TableRow
-                            key={contenido.nombre}
+                            key={index}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell>
-                                {contenido.nombre}
+                                {contenido.tipo}
                             </TableCell>
                             <TableCell>{contenido.extension}</TableCell>
                             <TableCell align="right">{contenido.cantidadVisualizaciones}</TableCell>
                             <TableCell align="right">{contenido.cantidadDescargas}</TableCell>
-                            <TableCell align="right">{contenido.categorías}</TableCell>
+                            <TableCell align="right">{contenido.categorias}</TableCell>
                         </TableRow>
                     )}
                 </TableBody>

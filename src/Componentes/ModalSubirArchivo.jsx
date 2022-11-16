@@ -46,7 +46,7 @@ export default function ModalSubirArchivo(props) {
       console.log(nombre)
       console.log(extension)
       console.log(archivo.file)
-      await service.subirArchivo(nombre, extension, archivo.file)
+      await service.subirArchivo(nombre, extension, archivo.file, categoriasContenido)
       props.close()
       window.location.reload()
     } catch {
