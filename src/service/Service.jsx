@@ -70,9 +70,10 @@ class Service {
 				'Content-Type': "multipart/form-data"
 			}
 		}
+		console.log(urlConsultaBackend('/guardar-el-contenido'))
 		return axios({
 			method: 'POST',
-			url: urlConsultaBackend('/guardarElContenido'),
+			url: urlConsultaBackend('/guardar-el-contenido'),
 			data: contenidoYArchivoAsociado,
 			config: opciones,
 		})

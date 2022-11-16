@@ -47,6 +47,7 @@ export default function ModalSubirArchivo(props) {
 
   //aca se va a llamar al service con los datos que necesite
   const aceptarNuevoArchivo = async () => {
+    try{
     const [nombre, extension] = archivo.name.split('.')
     console.log(nombre)
     console.log(extension)
@@ -54,6 +55,11 @@ export default function ModalSubirArchivo(props) {
     await service.subirArchivo(nombre, extension, archivo.file)
     props.close()
     window.location.reload()
+    }catch{
+      // eslint-disable-next-line no-alert
+      alert('Acepta hasta 20 caracteres en el titulo')
+    }
+    
   }
 
   return (

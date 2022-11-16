@@ -17,7 +17,7 @@ export const BotonDescarga = (props) => {
 
   return (
     <Link sx={{ pointerEvents: estaLogueado ? 'auto' : 'none' }}
-      href={`localhost:9090:${props.contenido.url}`}
+      href={`http://localhost:9000/descargar/${props.contenido.idContenido}`}
       download
     >
       <Button size="small" onClick={guardarDescarga} disabled={!estaLogueado}>

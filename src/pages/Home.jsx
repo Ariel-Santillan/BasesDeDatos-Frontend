@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import ListItemContenido from '../atomos/ListItemContenido/ListItemContenido'
 import ScrollBarCategoria from '../moleculas/ScrollBarCategoria/ScrollBarCategoria'
 import Button from '@mui/material/Button'
-import ModalSubirArchivo from '../Componentes/ModalSubirArchivo'
+import ModalSubirArchivo from '../componentes/ModalSubirArchivo'
 import { useState } from 'react'
 
 
