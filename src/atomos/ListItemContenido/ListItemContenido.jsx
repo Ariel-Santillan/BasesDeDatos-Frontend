@@ -50,9 +50,10 @@ const ListItemContenido = (props) => {
       await service.eliminarContenido(props.contenido.idContenido)
       props.eliminar(props.contenido.idContenido)
     } catch (e) {
-      generarError(e)
+      console.log(e)
     }
     close()
+    window.location.reload()
   }
 
   const aceptarEdicion = async () => {
@@ -67,6 +68,7 @@ const ListItemContenido = (props) => {
       console.log(e)
     }
     close()
+    window.location.reload()
   }
 
   const clickOpenEliminar = () => {
