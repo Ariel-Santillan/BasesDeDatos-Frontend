@@ -84,6 +84,7 @@ const ListItemContenido = (props) => {
   }
 
   const clickOpenVisualizar = async () => {
+    setOpenVisualizar(true)
     const contenidoVisualizado = {
       idUsuario: 1,
       idContenido: props.contenido.idContenido,
@@ -93,10 +94,9 @@ const ListItemContenido = (props) => {
       horaInicio: new Date().toLocaleTimeString("es-ES"),
       horaFin: new Date().toLocaleTimeString("es-ES"),
     }
-    var urlVideo = await service.guardarVisualizacion(contenidoVisualizado)
+    //var urlVideo = await service.guardarVisualizacion(contenidoVisualizado)
     props.visualizar(props.contenido.idContenido)
-    console.log(urlVideo.data)
-    setOpenVisualizar(true)
+    //console.log(urlVideo.data)
   }
   //preguntar
   const cambiarTitulo = (event) => {
@@ -140,8 +140,7 @@ const ListItemContenido = (props) => {
 			}
 
               <Dialog open={openVisualizar}>
-                <a href="C:/Users/ariel/Desktop/Base de Datos/TP Integrador/demo/BasesDeDatos-Backend/contenidos/prueba front 2.mp4" ></a>
-                {/* <DialogContent><video controls controlsList="nodownload" width='100%' height='auto' src={'/C:/Users/ariel/Desktop/Base de Datos/TP Integrador/demo/BasesDeDatos-Backend/contenidos/prueba front 2.mp4'}></video></DialogContent> */}
+                <DialogContent><video controls controlsList="nodownload" width='100%' height='auto' src={`http://localhost:9000/reproduccion/${props.contenido.idContenido}`}></video></DialogContent>
                 <DialogActions>
                   <Button onClick={close}>Cerrar</Button>
                 </DialogActions>
