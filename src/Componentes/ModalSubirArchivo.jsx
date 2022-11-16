@@ -12,9 +12,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
 
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
-
+import CheckboxCategoria from './CheckboxCategoria'
 import { service } from '../service/Service'
 
 export default function ModalSubirArchivo(props) {
@@ -31,7 +29,7 @@ export default function ModalSubirArchivo(props) {
   useEffect(() => {
     const fetchData = async () => {
       const categoriasBackend = await service.buscarCategorias()
-      setCategoriasAMostrar(categoriasBackend.data.map((categoria) => ({ ...categoria, estaChecado: false })))
+      setCategoriasAMostrar(categoriasBackend.data)
     }
     try {
       fetchData()
@@ -40,26 +38,23 @@ export default function ModalSubirArchivo(props) {
     }
   }, [])
 
-  function cargarCategoria(categoria) {
-    setCategoriasContenido([...categoriasContenido, categoria])
-    console.log("categorias a guardar: ", categoriasContenido)
-  }
 
   //aca se va a llamar al service con los datos que necesite
   const aceptarNuevoArchivo = async () => {
-    try{
-    const [nombre, extension] = archivo.name.split('.')
-    console.log(nombre)
-    console.log(extension)
-    console.log(archivo.file)
-    await service.subirArchivo(nombre, extension, archivo.file)
-    props.close()
-    window.location.reload()
-    }catch{
+    try {
+      const [nombre, extension] = archivo.name.split('.')
+      console.log(nombre)
+      console.log(extension)
+      console.log(archivo.file)
+      await service.subirArchivo(nombre, extension, archivo.file)
+      props.close()
+      window.location.reload()
+    } catch {
+      console.log(categoriasContenido)
       // eslint-disable-next-line no-alert
       alert('Acepta hasta 20 caracteres en el titulo')
     }
-    
+
   }
 
   return (
@@ -83,13 +78,11 @@ export default function ModalSubirArchivo(props) {
           </Button>
         </Box>
         <Typography>¿A qu&eacute; categor&iacute;a pertenece?</Typography>
-        <br/>
+        <br />
         <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-          {categoriasAMostrar.map((categoria, index) => <FormControlLabel key={categoria.id}
-            control={
-              <Checkbox checked={categoria.estaChecado} onChange={() => cargarCategoria(categoria)} name={categoria.nombre} />
-            }
-            label={categoria.nombre}
+          {categoriasAMostrar.map((categoria, index) => <CheckboxCategoria key={index}
+            categoria={categoria}
+            setCategoriasAGuardar={setCategoriasContenido}
           />)}
         </Box>
       </DialogContent>
