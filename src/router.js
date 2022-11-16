@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Reporte from './pages/Reporte'
-import Header from './Componentes/Header'
+import Header from './componentes/Header'
 import { useState, useEffect } from 'react'
 import {service} from './service/Service'
 
