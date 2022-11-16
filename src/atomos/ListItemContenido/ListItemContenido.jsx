@@ -65,8 +65,7 @@ const ListItemContenido = (props) => {
       )
       props.editar(props.contenido.idContenido, nuevoTitulo)
     } catch (e) {
-      // eslint-disable-next-line no-alert
-      alert('El titulo del archivo no debe superar los 50 caracteres')
+      console.log(e)   
     }
     close()
     window.location.reload()
